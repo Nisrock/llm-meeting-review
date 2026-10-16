@@ -1,0 +1,180 @@
+{
+  "meta": {
+    "source": "sample_meeting.mp3",
+    "generated_at": "2026-10-16T18:25:02.182330+00:00"
+  },
+  "model": "claude-opus-5-5",
+  "score": {
+    "passed": 10,
+    "failed": 0,
+    "unclear": 1,
+    "total": 11
+  },
+  "review": {
+    "summary": "Менеджер провёл диагностику производителя мебели: конверсия из лида в договор 5 %, цель удвоить выручку без роста штата. Презентация построена через боль клиента, цена названа прямо. Возражение «дорого, надо посоветоваться с партнёром» отработано расчётом выгоды, назначена встреча с партнёром на четверг 11:00.",
+    "goal_achieved": true,
+    "criteria": [
+      {
+        "id": "greeting",
+        "status": "pass",
+        "quote": "Меня зовут [МЕНЕДЖЕР], я из компании [КОМПАНИЯ]. У нас есть 40 минут, удобно говорить?",
+        "comment": "Представление, регламент и проверка времени.",
+        "quote_verified": true,
+        "time": "00:00",
+        "quote_role": "manager"
+      },
+      {
+        "id": "situation",
+        "status": "pass",
+        "quote": "У нас производство мебели на заказ, оборот около восьмидесяти миллионов в год, в отделе продаж шесть человек.",
+        "comment": "Ниша, оборот, команда названы.",
+        "quote_verified": true,
+        "time": "00:30",
+        "quote_role": "client"
+      },
+      {
+        "id": "pain",
+        "status": "pass",
+        "quote": "Менеджеры сливают заявки. Приходит сто лидов в неделю, до договора доходят пять.",
+        "comment": "Боль сформулирована клиентом с цифрами.",
+        "quote_verified": true,
+        "time": "01:20",
+        "quote_role": "client"
+      },
+      {
+        "id": "goal",
+        "status": "pass",
+        "quote": "Хочу удвоить выручку, до ста шестидесяти миллионов, без увеличения штата продаж.",
+        "comment": "Цель измерима, горизонт год.",
+        "quote_verified": true,
+        "time": "02:40",
+        "quote_role": "client"
+      },
+      {
+        "id": "consequence",
+        "status": "unclear",
+        "quote": "",
+        "comment": "Менеджер не спросил, что будет, если ничего не менять.",
+        "quote_verified": false,
+        "time": "",
+        "quote_role": ""
+      },
+      {
+        "id": "experience",
+        "status": "pass",
+        "quote": "Нанимали тренера по продажам, провёл два тренинга, эффект продержался месяц.",
+        "comment": "Прошлый опыт выяснен.",
+        "quote_verified": true,
+        "time": "03:20",
+        "quote_role": "client"
+      },
+      {
+        "id": "presentation",
+        "status": "pass",
+        "quote": "Первое: контроль каждого звонка, а не выборочно, чтобы вы видели, где именно теряются заявки.",
+        "comment": "Продукт показан через боль клиента.",
+        "quote_verified": true,
+        "time": "04:00",
+        "quote_role": "manager"
+      },
+      {
+        "id": "price",
+        "status": "pass",
+        "quote": "Стоимость программы четыреста пятьдесят тысяч рублей за три месяца, можно разбить на три платежа.",
+        "comment": "Цена названа прямо.",
+        "quote_verified": true,
+        "time": "07:10",
+        "quote_role": "manager"
+      },
+      {
+        "id": "objections",
+        "status": "pass",
+        "quote": "Давайте посчитаем вместе: сейчас пять договоров из ста, при десяти это плюс пять договоров в неделю",
+        "comment": "Возражение «дорого» отработано расчётом.",
+        "quote_verified": true,
+        "time": "07:50",
+        "quote_role": "manager"
+      },
+      {
+        "id": "next_step",
+        "status": "pass",
+        "quote": "Предлагаю созвониться в четверг в одиннадцать, вы с партнёром, я с расчётом под ваши цифры.",
+        "comment": "Конкретная дата и участники.",
+        "quote_verified": true,
+        "time": "08:55",
+        "quote_role": "manager"
+      },
+      {
+        "id": "summary",
+        "status": "pass",
+        "quote": "Зафиксировали: четверг, одиннадцать, встреча с партнёром, я пришлю расчёт накануне.",
+        "comment": "Итог подведён.",
+        "quote_verified": true,
+        "time": "09:25",
+        "quote_role": "manager"
+      }
+    ],
+    "client_objections": [
+      "Дорого",
+      "Надо посоветоваться с партнёром"
+    ],
+    "risks": [
+      "Партнёр не участвовал в диагностике и может не разделять оценку боли",
+      "Цена бездействия не обсуждалась, клиенту легко отложить решение"
+    ],
+    "next_step": "Четверг 11:00, встреча с партнёром, менеджер присылает расчёт накануне",
+    "quotes_downgraded": 0
+  },
+  "metrics": {
+    "duration_sec": 1520.0,
+    "talk_share": {
+      "manager": 0.7,
+      "client": 0.3
+    },
+    "questions": {
+      "manager": 7,
+      "client": 1
+    },
+    "words": {
+      "manager": 236,
+      "client": 103
+    },
+    "longest_manager_monologue": {
+      "role": "manager",
+      "seconds": 179.5,
+      "start": 240.5
+    },
+    "required_phrases": [
+      {
+        "id": "time_check",
+        "label": "Проверка времени",
+        "found": true,
+        "hits": [
+          "удобно говорить"
+        ]
+      },
+      {
+        "id": "next_step_ask",
+        "label": "Вопрос о следующем шаге",
+        "found": true,
+        "hits": [
+          "Предлагаю созвониться"
+        ]
+      }
+    ],
+    "forbidden_phrases": []
+  },
+  "cost": {
+    "model": "claude-opus-5-5",
+    "tokens": {
+      "input": 5200,
+      "output": 900,
+      "cache_read": 1100,
+      "cache_write": 0
+    },
+    "usd": 0.039,
+    "rub": 3.51,
+    "usd_rub": 90.0
+  },
+  "escalations": []
+}

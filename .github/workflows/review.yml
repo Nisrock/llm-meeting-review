@@ -1,0 +1,67 @@
+name: Разбор встречи
+
+# Запуск вручную со ссылкой на запись. В бою такой же workflow крутился по cron
+# и брал список новых записей из таблицы; здесь оставлен ручной вход, чтобы
+# репозиторий работал без чужих таблиц и папок.
+on:
+  workflow_dispatch:
+    inputs:
+      audio_url:
+        description: Ссылка на запись (mp3/m4a/mp4), доступная по https
+        required: true
+      manager:
+        description: Имя менеджера для сводной таблицы
+        required: false
+        default: ""
+      model:
+        description: Модель для разбора
+        required: false
+        default: claude-opus-5-5
+  # schedule:
+  #   - cron: "0 3 * * 1-5"   # 06:00 МСК по будням
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e .
+      - name: Чек-лист из секрета
+        run: echo "$CHECKLIST_JSON" > checklist.json
+        env:
+          CHECKLIST_JSON: ${{ secrets.CHECKLIST_JSON }}
+      - name: Транскрибация и разбор
+        run: |
+          meeting-review run "${{ inputs.audio_url }}" \
+            --checklist checklist.json \
+            --out out/report.md \
+            --model "${{ inputs.model }}" \
+            --manager "${{ inputs.manager }}" \
+            --csv out/summary.csv \
+            --telegram
+        env:
+          DEEPGRAM_API_KEY: ${{ secrets.DEEPGRAM_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          USD_RUB: "90"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: report
+          path: out/
+          retention-days: 30
+
+  tests:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e .[dev]
+      - run: pytest -q
