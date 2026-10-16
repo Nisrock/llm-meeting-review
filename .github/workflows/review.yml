@@ -4,6 +4,9 @@ name: Разбор встречи
 # и брал список новых записей из таблицы; здесь оставлен ручной вход, чтобы
 # репозиторий работал без чужих таблиц и папок.
 on:
+  push:
+    branches: [main]
+  pull_request:
   workflow_dispatch:
     inputs:
       audio_url:
@@ -22,6 +25,7 @@ on:
 
 jobs:
   review:
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
